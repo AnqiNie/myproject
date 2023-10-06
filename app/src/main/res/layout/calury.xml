@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="请输入你的体重"
+            android:textSize="20dp"></TextView>
+
+        <EditText
+            android:id="@+id/w_input"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/white"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:textSize="30sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="请输入你的运动距离"
+            android:textSize="20dp"></TextView>
+
+        <EditText
+            android:id="@+id/t_input"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/white"
+            android:editable="false"
+            android:paddingBottom="5dp"
+            android:textSize="30sp" />
+
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="请选择你完成的运动"
+            android:textSize="20dp"></TextView>
+
+
+        <RadioGroup
+            android:id="@+id/radio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <RadioButton android:id="@+id/RadioButton_walk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="健走"
+                android:onClick="onRadioButtonClicked"
+                android:checked="true"/>
+        <RadioButton android:id="@+id/RadioButton_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跑步"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/RadioButton_bike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自行车"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/RadioButton_skate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="溜冰"
+            android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_com"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="OK"
+            android:textSize="20sp"
+            android:background="@drawable/white"/>
+
+        <EditText
+            android:id="@+id/result_input"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:background="@drawable/white"
+            android:editable="false"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="5dp"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+</LinearLayout>
