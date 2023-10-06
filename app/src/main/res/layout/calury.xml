@@ -24,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/white"
-            android:editable="false"
+            android:editable="true"
+            android:inputType="number"
             android:paddingBottom="5dp"
             android:textSize="30sp" />
     </LinearLayout>
@@ -47,7 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/white"
-            android:editable="false"
+            android:editable="true"
+            android:inputType="number"
             android:paddingBottom="5dp"
             android:textSize="30sp" />
 
@@ -114,11 +116,11 @@
 
         <EditText
             android:id="@+id/result_input"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
+            android:layout_width="273dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:background="@drawable/white"
             android:editable="false"
-            android:layout_marginStart="10dp"
             android:paddingBottom="5dp"
             android:textSize="30sp" />
 

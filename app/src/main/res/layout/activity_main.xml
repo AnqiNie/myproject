@@ -18,14 +18,22 @@
         android:paddingBottom="5dp"
         android:textSize="30sp" />
 
-    <ImageButton
-        android:id="@+id/btn_more"
-        android:layout_marginLeft="350dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/more"
-        android:background="@drawable/selector"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageButton
+            android:id="@+id/btn_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/selector"
+            android:src="@drawable/more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout
