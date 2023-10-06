@@ -1,9 +1,15 @@
-package com.example.myapplication;
+package com.example.myplus;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,13 +20,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_0,btn_1,btn_2,btn_3,btn_4,btn_5,btn_6,btn_7,btn_8,btn_9,btn_pt;
     Button btn_mul,btn_div,btn_add,btn_sub;
     Button btn_clr,btn_del,btn_eq;
+    ImageButton more;
     EditText et_input;
     boolean clr_flag = false;    //判断et编辑文本框中是否清空
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         //实例化对象
         setContentView(R.layout.activity_main);
         btn_0= (Button) findViewById(R.id.btn_0);
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_del= (Button) findViewById(R.id.btn_del);
         btn_eq= (Button) findViewById(R.id.btn_eq);
         et_input= (EditText) findViewById(R.id.et_input);
-
+        more=(ImageButton)findViewById(R.id.btn_more);
         //给按钮设置的点击事件
         btn_0.setOnClickListener(this);
         btn_1.setOnClickListener(this);
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_clr.setOnClickListener(this);
         btn_del.setOnClickListener(this);
         btn_eq.setOnClickListener(this);
+        more.setOnClickListener(this);
     }
 
     @Override
@@ -134,6 +141,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getResult();
             clr_flag = false;
         }
+        else if(id==R.id.btn_del){
+            if(et_input.getText().length() > 1){
+                et_input.getText().delete(et_input.getText().length()-2,et_input.getText().length()-1);
+            } else if (et_input.getText().length() > 0){
+                et_input.getText().clear();
+            }
+        } else if (id==R.id.btn_more) {
+            Intent intent = new Intent(this, Activity2.class);
+            startActivity(intent);
+        }
+
 
 //        switch (v.getId()){
 //            case   R.id.btn_0:
@@ -192,9 +210,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getResult() {
-        String exp=et_input.getText().toString();
-        if(exp==null||exp.equals("")) return ;
-        //因为没有运算符所以不用运算
+        try {
+            String exp=et_input.getText().toString();
+            if(exp==null||exp.equals("")) return ;
+            //因为没有运算符所以不用运算
 //        if(!exp.contains(" ")){
 //            return ;
 //        }
@@ -203,80 +222,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            return ;
 //        }
 //        clr_flag=true;
-        //截取运算符前面的字符串
-        String s1=exp.substring(0,exp.indexOf(" "));
-        //截取的运算符
-        String op=exp.substring(exp.indexOf(" ")+1,exp.indexOf(" ")+2);
-        //截取运算符后面的字符串
-        String s2=exp.substring(exp.indexOf(" ")+3);
-        double cnt=0;
-        if(!s1.equals("")&&!s2.equals("")){
-            double d1=Double.parseDouble(s1);
-            double d2=Double.parseDouble(s2);
-            if(op.equals("+")){
-                cnt=d1+d2;
+            //截取运算符前面的字符串
+            String s1=exp.substring(0,exp.indexOf(" "));
+            //截取的运算符
+            String op=exp.substring(exp.indexOf(" ")+1,exp.indexOf(" ")+2);
+            //截取运算符后面的字符串
+            String s2=exp.substring(exp.indexOf(" ")+3);
+            double cnt=0;
+            if(!s1.equals("")&&!s2.equals("")){
+                double d1=Double.parseDouble(s1);
+                double d2=Double.parseDouble(s2);
+                if(op.equals("+")){
+                    cnt=d1+d2;
+                }
+                if(op.equals("-")){
+                    cnt=d1-d2;
+                }
+                if(op.equals("×")){
+                    cnt=d1*d2;
+                }
+                if(op.equals("÷")){
+                    if(d2==0) cnt=0;
+                    else cnt=d1/d2;
+                }
+                if(!s1.contains(".")&&!s2.contains(".")&&!op.equals("÷")) {
+                    int res = (int) cnt;
+                    et_input.setText(res+"");
+                }else {
+                    et_input.setText(cnt+"");}
             }
-            if(op.equals("-")){
-                cnt=d1-d2;
+            //如果s1是空    s2不是空  就执行下一步
+            else if(!s1.equals("")&&s2.equals("")){
+                double d1=Double.parseDouble(s1);
+                if(op.equals("+")){
+                    cnt=d1;
+                }
+                if(op.equals("-")){
+                    cnt=d1;
+                }
+                if(op.equals("×")){
+                    cnt=0;
+                }
+                if(op.equals("÷")){
+                    cnt=0;
+                }
+                if(!s1.contains(".")) {
+                    int res = (int) cnt;
+                    et_input.setText(res+"");
+                }else {
+                    et_input.setText(cnt+"");}
             }
-            if(op.equals("×")){
-                cnt=d1*d2;
+            //如果s1是空    s2不是空  就执行下一步
+            else if(s1.equals("")&&!s2.equals("")){
+                double d2=Double.parseDouble(s2);
+                if(op.equals("+")){
+                    cnt=d2;
+                }
+                if(op.equals("-")){
+                    cnt=0-d2;
+                }
+                if(op.equals("×")){
+                    cnt=0;
+                }
+                if(op.equals("÷")){
+                    cnt=0;
+                }
+                if(!s2.contains(".")) {
+                    int res = (int) cnt;
+                    et_input.setText(res+"");
+                }else {
+                    et_input.setText(cnt+"");}
             }
-            if(op.equals("÷")){
-                if(d2==0) cnt=0;
-                else cnt=d1/d2;
+            else {
+                et_input.setText("");
             }
-            if(!s1.contains(".")&&!s2.contains(".")&&!op.equals("÷")) {
-                int res = (int) cnt;
-                et_input.setText(res+"");
-            }else {
-                et_input.setText(cnt+"");}
-        }
-        //如果s1是空    s2不是空  就执行下一步
-        else if(!s1.equals("")&&s2.equals("")){
-            double d1=Double.parseDouble(s1);
-            if(op.equals("+")){
-                cnt=d1;
-            }
-            if(op.equals("-")){
-                cnt=d1;
-            }
-            if(op.equals("×")){
-                cnt=0;
-            }
-            if(op.equals("÷")){
-                cnt=0;
-            }
-            if(!s1.contains(".")) {
-                int res = (int) cnt;
-                et_input.setText(res+"");
-            }else {
-                et_input.setText(cnt+"");}
-        }
-        //如果s1是空    s2不是空  就执行下一步
-        else if(s1.equals("")&&!s2.equals("")){
-            double d2=Double.parseDouble(s2);
-            if(op.equals("+")){
-                cnt=d2;
-            }
-            if(op.equals("-")){
-                cnt=0-d2;
-            }
-            if(op.equals("×")){
-                cnt=0;
-            }
-            if(op.equals("÷")){
-                cnt=0;
-            }
-            if(!s2.contains(".")) {
-                int res = (int) cnt;
-                et_input.setText(res+"");
-            }else {
-                et_input.setText(cnt+"");}
-        }
-        else {
-            et_input.setText("");
+        } catch (Exception e){
+            e.printStackTrace();
+            et_input.setText("ERROR");
         }
     }
 }
-
